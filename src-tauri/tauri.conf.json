@@ -1,0 +1,43 @@
+{
+  "build": {
+    "beforeBuildCommand": "",
+    "beforeDevCommand": "npm install && npm run dev",
+    "devPath": "http://localhost:4173",
+    "distDir": "../dist"
+  },
+  "package": {
+    "productName": "Meeting Action Taker",
+    "version": "0.1.0"
+  },
+    "tauri": {
+    "allowlist": {
+      "all": false,
+      "shell": {
+        "all": false,
+        "open": true
+      },
+      "fs": {
+        "all": true,
+        "scope": ["$APPDATA/**", "$HOME/recordings/**"]
+      }
+    },
+    "bundle": {
+      "active": true,
+      "targets": "all",
+      "identifier": "com.meeting-action-taker.app"
+    },
+    "security": {
+      "csp": null
+    },
+    "windows": [
+      {
+        "fullscreen": false,
+        "resizable": true,
+        "title": "Action Taker",
+        "width": 1200,
+        "height": 800
+      }
+    ]
+  }
+
+}

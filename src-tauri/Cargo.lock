@@ -1966,6 +1966,7 @@ dependencies = [
  "chrono",
  "cpal",
  "hound",
+ "once_cell",
  "reqwest",
  "serde",
  "serde_json",

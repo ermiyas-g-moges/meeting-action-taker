@@ -1,5 +1,4 @@
 use reqwest::blocking::Client;
-use serde_json::json;
 
 pub fn create_trello_cards(items: &[String]) -> Result<String, anyhow::Error> {
     let trello_key = std::env::var("TRELLO_KEY").unwrap_or_default();

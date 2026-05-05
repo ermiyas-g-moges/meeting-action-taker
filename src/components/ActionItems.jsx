@@ -1,6 +1,6 @@
-export default function ActionItems({ actionItems }) {
+export default function ActionItems({ actionItems, fullWidth }) {
   return (
-    <section className="panel rounded-3xl border p-6 shadow-sm">
+    <section className={`panel rounded-3xl border p-6 shadow-sm ${fullWidth ? 'h-full flex flex-col' : ''}`}>
       <h2 className="text-lg font-semibold text-[var(--text-color)]">Action Items</h2>
       <p className="mt-1 text-sm text-[var(--text-secondary)]">Automatically extracted from your meeting transcript.</p>
       {actionItems.length === 0 ? (

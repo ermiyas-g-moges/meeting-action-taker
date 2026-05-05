@@ -1,7 +1,7 @@
 import { invoke } from '@tauri-apps/api/tauri';
 import { useState } from 'react';
 
-export default function ImageUpload({ setLog }) {
+export default function ImageUpload({ setLog, onUploadSuccess }) {
   const [selectedFile, setSelectedFile] = useState(null);
 
   const uploadImage = async () => {
@@ -12,9 +12,15 @@ export default function ImageUpload({ setLog }) {
 
     const buffer = await selectedFile.arrayBuffer();
     try {
-      await invoke('upload_image', { fileName: selectedFile.name, data: Array.from(new Uint8Array(buffer)) });
+      await invoke('upload_image', { 
+        payload: { 
+          name: selectedFile.name, 
+          data: Array.from(new Uint8Array(buffer)) 
+        } 
+      });
       setLog('Image uploaded successfully.');
       setSelectedFile(null);
+      if (onUploadSuccess) onUploadSuccess();
     } catch (error) {
       setLog(`Image upload failed: ${error}`);
     }

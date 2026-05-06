@@ -48,6 +48,16 @@ fn save_video(payload: FilePayload) -> Result<String, String> {
 }
 
 #[tauri::command]
+fn delete_recording(name: String) -> Result<(), String> {
+    storage::delete_recording(&name).map_err(|e| e.to_string())
+}
+
+#[tauri::command]
+fn delete_image(name: String) -> Result<(), String> {
+    storage::delete_image(&name).map_err(|e| e.to_string())
+}
+
+#[tauri::command]
 fn upload_image(payload: FilePayload) -> Result<String, String> {
     storage::save_image(&payload.name, &payload.data).map_err(|e| e.to_string())
 }
@@ -62,7 +72,9 @@ fn main() {
             get_recording_path,
             list_recordings,
             save_video,
-            upload_image
+            upload_image,
+            delete_recording,
+            delete_image
         ])
         .run(tauri::generate_context!())
         .expect("failed to run app");

@@ -92,3 +92,25 @@ pub fn list_recordings() -> Result<Vec<String>, anyhow::Error> {
     files.sort_by(|a, b| b.cmp(a));
     Ok(files)
 }
+
+pub fn delete_recording(name: &str) -> Result<(), anyhow::Error> {
+    let storage = get_storage_path()?;
+    let path = storage.join(name);
+    if path.exists() {
+        fs::remove_file(path)?;
+        Ok(())
+    } else {
+        Err(anyhow::anyhow!("File not found"))
+    }
+}
+
+pub fn delete_image(name: &str) -> Result<(), anyhow::Error> {
+    let storage = get_upload_path()?;
+    let path = storage.join(name);
+    if path.exists() {
+        fs::remove_file(path)?;
+        Ok(())
+    } else {
+        Err(anyhow::anyhow!("File not found"))
+    }
+}
